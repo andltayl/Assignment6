@@ -42,7 +42,8 @@ void employeeList::read_from_file(string file)
 		iFile >> temp->first_name;
 		iFile >> temp->last_name;
 		iFile >> temp->salary;
-
+		
+		tail->next = temp;
 		tail = temp;
 	}
 
