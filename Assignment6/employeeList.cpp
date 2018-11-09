@@ -12,12 +12,12 @@ employeeList::employeeList()
 
 employeeList::~employeeList()
 {
-	/*node * temp = head;
-
-	while (temp != NULL) {
-		node * nextNode = temp->next;
+	
+/*
+	while (head != NULL) {
+		node * temp = head;
+		head = head->next;
 		delete temp;
-		temp = nextNode;
 	}*/
 }
 
@@ -79,12 +79,34 @@ void employeeList::write_to_file(string file)
 
 double employeeList::lookup(string fName, string lName)
 {
-	return 0.0;
+	node * temp = head;
+
+	while (temp != NULL) {
+		if (temp->first_name == fName && temp->last_name == lName) {
+			return temp->salary;
+		}
+		temp = temp->next;
+	}
+	return -1;
 }
 
 string employeeList::reverse_lookup(double min, double max)
 {
-	return string();
+	node * temp = head;
+	string names;
+
+	while (temp != NULL) {
+		if (temp->salary <= max && temp->salary >= min) {
+			names += temp->first_name + " " + temp->last_name + '\n';
+		}
+		temp = temp->next;
+	}
+
+	if (names.length() > 1) {
+		return names;
+	}
+	
+	return "No matches found.\n";
 }
 
 void employeeList::print()
@@ -101,5 +123,5 @@ void employeeList::print()
 
 void employeeList::delete_employee(string name)
 {
-
+	//TODO
 }
