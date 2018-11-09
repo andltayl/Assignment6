@@ -12,6 +12,13 @@ employeeList::employeeList()
 
 employeeList::~employeeList()
 {
+	/*node * temp = head;
+
+	while (temp != NULL) {
+		node * nextNode = temp->next;
+		delete temp;
+		temp = nextNode;
+	}*/
 }
 
 void employeeList::push_front(node * entry)
@@ -94,4 +101,5 @@ void employeeList::print()
 
 void employeeList::delete_employee(string name)
 {
+
 }
