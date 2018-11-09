@@ -37,14 +37,18 @@ void employeeList::read_from_file(string file)
 
 		if (head == NULL) {
 			head = temp;
+			tail = temp;
 		}
 
 		iFile >> temp->first_name;
 		iFile >> temp->last_name;
 		iFile >> temp->salary;
+
+		temp->next = NULL;
 		
 		tail->next = temp;
 		tail = temp;
+		iFile.get();
 	}
 
 	iFile.close();
@@ -72,7 +76,7 @@ void employeeList::print()
 		cout << "Name: " << temp->first_name << " " << temp->last_name << '\n';
 		cout << "Salary: $" << temp->salary << '\n' << endl;
 
-		temp = temp->next;
+		temp = temp->next;		
 	}
 }
 
