@@ -14,16 +14,16 @@ employeeList::~employeeList()
 {
 }
 
-void employeeList::push_front(node entry)
+void employeeList::push_front(node * entry)
 {
-	entry.next = head;
-	head = &entry;
+	entry->next = head;
+	head = entry;
 }
 
-void employeeList::push_back(node entry)
+void employeeList::push_back(node * entry)
 {
-	tail -> next = &entry;
-	tail = &entry;
+		tail->next = entry;
+		tail = entry;
 }
 
 void employeeList::read_from_file(string file)
@@ -46,8 +46,8 @@ void employeeList::read_from_file(string file)
 
 		temp->next = NULL;
 		
-		tail->next = temp;
-		tail = temp;
+		push_back(temp);
+		
 		iFile.get();
 	}
 
@@ -56,6 +56,18 @@ void employeeList::read_from_file(string file)
 
 void employeeList::write_to_file(string file)
 {
+	ofstream oFile;
+	oFile.open(file.c_str());
+	node * temp = head;
+
+	while (temp != NULL) {
+		oFile << '\n' << temp->first_name << " " << temp->last_name << '\n';
+		oFile << fixed << setprecision(2) << temp->salary;
+
+		temp = temp->next;
+	}
+
+	oFile.close();
 }
 
 double employeeList::lookup(string fName, string lName)
@@ -74,7 +86,7 @@ void employeeList::print()
 
 	while (temp != NULL) {
 		cout << "Name: " << temp->first_name << " " << temp->last_name << '\n';
-		cout << "Salary: $" << temp->salary << '\n' << endl;
+		cout << fixed << setprecision(2) << "Salary: $" << temp->salary << '\n' << endl;
 
 		temp = temp->next;		
 	}
