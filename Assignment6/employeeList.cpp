@@ -123,5 +123,25 @@ void employeeList::print()
 
 void employeeList::delete_employee(string name)
 {
-	//TODO
+	node * current = head;
+	node * prev = head;
+
+	int n = name.find_first_of(' ');
+	string fName = name.substr(0, n);
+	string lName = name.substr(n + 1, name.length() - 1);
+
+	cout << fName << " " << lName << endl;
+	while (current != NULL) {
+		if (current->first_name == fName && current->last_name == lName) {
+			cout << "works!\n";
+
+			prev->next = current->next;
+			delete current;
+			return;
+		}
+		prev = current;
+		current = current->next;
+	}
+	cout << "\nNot Found!\n";
+	return;
 }
